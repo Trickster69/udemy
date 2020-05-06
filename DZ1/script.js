@@ -21,4 +21,4 @@ appData.expenses.question1 = question2;
 
 alert(appData.budjet / 30);
 
-//Добавил пару слов для коммита
+//Добавил

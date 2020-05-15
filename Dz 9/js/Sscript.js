@@ -66,7 +66,9 @@ window.addEventListener('DOMContentLoaded', function () {
             function addZero(num) {
                 if (num <= 9) {
                     return '0' + num;
-                } else return num;
+                } else {
+                    return num;
+                }
             }
 
             hours.textContent = addZero(t.hours);

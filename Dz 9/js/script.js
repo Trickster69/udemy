@@ -21,6 +21,15 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    //использовал форич
+    // tab.forEach(function (item, number) {
+    //     item.addEventListener('click', function () {
+    //         hideTabContent(0);
+    //         showTabContent(number);
+    //     });
+    // });
+
+    //использовал делегирование
     info.addEventListener('click', function (event) {
         let target = event.target;
         if (target && target.classList.contains('info-header-tab')) {
@@ -66,7 +75,9 @@ window.addEventListener('DOMContentLoaded', function () {
             function addZero(num) {
                 if (num <= 9) {
                     return '0' + num;
-                } else return num;
+                } else {
+                    return num;
+                }
             }
 
             hours.textContent = addZero(t.hours);
@@ -85,21 +96,41 @@ window.addEventListener('DOMContentLoaded', function () {
 
     setClock('timer', deadline);
 
-    //modal 
+    //modal
+
 
     let more = document.querySelector('.more'),
         overlay = document.querySelector('.overlay'),
-        close = document.querySelector('.popup-close');
+        close = document.querySelector('.popup-close'),
+        moreTab = document.querySelectorAll('.description-btn');
 
-    more.addEventListener('click', function () {
+    function showModal() {
         overlay.style.display = 'block';
-        this.classList.add('more-splash'); //добавили анимацию
-        document.body.style.overflow = 'hidden'; //запретили прокрутку страницы при открытии модального окна.
-    });
+        more.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    }
 
-    close.addEventListener('click', function () {
+    function hideMoadl() {
         overlay.style.display = 'none';
         more.classList.remove('more-splash');
         document.body.style.overflow = '';
+    }
+
+    moreTab.forEach(function (item) {
+        item.addEventListener('click', showModal);
     });
+    more.addEventListener('click', showModal);
+    close.addEventListener('click', hideMoadl);
+
+    // more.addEventListener('click', function () {
+    //     overlay.style.display = 'block';
+    //     this.classList.add('more-splash'); //добавили анимацию
+    //     document.body.style.overflow = 'hidden'; //запретили прокрутку страницы при открытии модального окна.   
+    // });
+
+    // close.addEventListener('click', function () {
+    //     overlay.style.display = 'none';
+    //     more.classList.remove('more-splash');
+    //     document.body.style.overflow = '';    //     
+    // });    
 });

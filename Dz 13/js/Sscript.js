@@ -103,4 +103,48 @@ window.addEventListener('DOMContentLoaded', function () {
         more.classList.remove('more-splash');
         document.body.style.overflow = '';
     });
+
+
+    //slider
+    let slideIndex = 1,
+        sliders = document.querySelectorAll('.slider-item'),
+        prev = document.querySelector('.prev'),
+        next = document.querySelector('.next'),
+        sliderDots = document.querySelector('.slider-dots'),
+        dots = document.querySelectorAll('.dot');
+
+    function showSlide(n) {
+
+        if (n < 1) {
+            slideIndex = sliders.length;
+        }
+        if (n > sliders.length) {
+            slideIndex = 1;
+        }
+
+        sliders.forEach((item) => item.style.display = "none");
+        dots.forEach((item) => item.classList.remove('dot-active'));
+
+        sliders[slideIndex - 1].style.display = 'block';
+        dots[slideIndex - 1].classList.add('dot-active');
+    }
+    showSlide(slideIndex);
+
+    next.addEventListener('click', () => {
+        showSlide(slideIndex += 1);
+    });
+    prev.addEventListener('click', () => {
+        showSlide(slideIndex += -1);
+    });
+
+    sliderDots.addEventListener('click', (event) => {
+        for (let i = 0; i < dots.length + 1; i++) {
+            if (event.target.classList.contains('dot') && event.target == dots[i - 1]) {
+                showSlide(slideIndex = i);
+            }
+        }
+    });
+
+
+
 });
